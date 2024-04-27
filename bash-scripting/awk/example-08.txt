@@ -1,0 +1,3 @@
+Apple,Red,Tasty
+Banana,Yellow,Tasty
+Grape,Purple,Sour
