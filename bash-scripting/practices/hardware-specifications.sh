@@ -1,4 +1,6 @@
 #!/bin/bash
+
+#!/bin/bash
 mkdir -p $HOME/tmp
 
 echo -e '\n' >> $HOME/tmp/basic-check.txt
