@@ -1,6 +1,4 @@
 #!/bin/bash
-
-#!/bin/bash
 mkdir -p $HOME/tmp
 
 echo -e '\n' >> $HOME/tmp/basic-check.txt
@@ -23,7 +21,6 @@ echo -e '\n' >> $HOME/tmp/basic-check.txt
 # check system Hardware
 ##CPU
 echo '** CPU Attributes:' >> $HOME/tmp/basic-check.txt
-lscpu | grep 'Model name:' >> $HOME/tmp/basic-check.txt
 lscpu | grep 'Model name:' >> $HOME/tmp/basic-check.txt
 lscpu | grep -w '^CPU(s)' >> $HOME/tmp/basic-check.txt
 lscpu | grep -w '^Socket(s):' >> $HOME/tmp/basic-check.txt

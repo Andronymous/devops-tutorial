@@ -28,6 +28,7 @@ dns_record(){
 
 #tracerout ip packet route from source to destination showing response time of each hop
 custom_traceroute(){
+    domain="andronymous.ir"
     max_hop='35'
     route=$(traceroute -I -m $max_hop $domain)
     echo -e "this is route to $domain using ICMP packets:\n $route"
@@ -36,7 +37,7 @@ custom_traceroute(){
 #netstat network connection, open ports
 port_checker(){
     port='80'
-    status=$(netstat -an | grep $port | head -n 1 |awk '{ print $6 }')
+    status=$(netstat -an | grep $port | head -n 1 | awk '{ print $6 }')
     echo "the status for port $port is : $status"
     netstat -an | grep $port
     echo -e "end of netstat\n"
