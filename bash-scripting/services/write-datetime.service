@@ -2,7 +2,7 @@
 Description=Write current date and time to a file every 10 seconds
 
 [Service]
-User=<your_username>
+User=root
 WorkingDirectory=/data/service-test
 ExecStart=/data/service-test/write_datetime.sh
 Restart=always

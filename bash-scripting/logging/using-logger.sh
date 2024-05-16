@@ -9,7 +9,7 @@ logger -p user.info "message to be logged"
 
 # -i for PID -t for TAG
 # -s for displaying the output while writing into syslog
-logger -s -i -t to_log -p user.info "${BOLD}message to be logged"
+logger -s -i -t to_log -p user.info "other message to be logged"
 
 ################################################################
 function to_log() {
@@ -20,14 +20,7 @@ function to_log() {
     logger -s -i -t to_log -p ${FACILITY}.${LOG_LEVEL} $MSG
 }
 
-# Define the green color variable
-green='\033[0;32m'
-# Define the red color variable
-RED='\033[0;31m'
-# Define the reset color variable
-clear='\033[0m'
-
-to_log user INFO "this is an ${green}info message to be logged${clear}"
-to_log user INFO "this is an ${green}error message to be logged${clear}"
+to_log user INFO "this is an info message to be logged"
+to_log user ERR "this is an error message to be logged"
 
 cat /var/log/syslog | grep to_log
