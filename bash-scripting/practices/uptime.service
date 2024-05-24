@@ -1,0 +1,13 @@
+[Unit]
+Description=Write system uptime in start up and shutdown of system
+
+[Service]
+User=root
+WorkingDirectory=/data/service-test
+ExecStart=/data/service-test/system-uptime.sh start
+ExecStop=/data/service-test/system-uptime.sh stop
+Restart=on-failure
+RestartSec=10
+RemainAfterExit=yes
+[Install]
+WantedBy=multi-user.target
