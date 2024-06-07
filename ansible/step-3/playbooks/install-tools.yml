@@ -1,0 +1,19 @@
+---
+
+#- hosts: all
+#- hosts: dbservers
+
+- hosts: all
+  become: true
+  gather_facts: yes
+  name: "Install nginx"
+  roles:
+    - install-tools
+  tasks:
+    - name: Check nginx version
+      shell: nginx -v
+      register: command_output
+
+    - name: Print the captured stdout
+      ansible.builtin.debug:
+        msg: "{{ command_output.stdout }}"
