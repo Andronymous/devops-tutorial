@@ -1,0 +1,9 @@
+---
+-  name: test different type of variables
+   hosts: webservers
+   become: true
+   gather_facts: no
+   vars:
+     playbook_var: "this is the playbook_var defined in the main playbook"
+   roles:
+     - test-variables

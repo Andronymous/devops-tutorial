@@ -1,0 +1,3 @@
+# roles/example_role/vars/main.yml
+---
+role_var: "this is the role_var defined in role vars directory"

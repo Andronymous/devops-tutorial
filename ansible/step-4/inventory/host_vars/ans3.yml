@@ -1,0 +1,4 @@
+# package list for ans3 host
+---
+http_port: "80"
+host_var: "this is host_var for host ans3"

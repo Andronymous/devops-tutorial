@@ -1,0 +1,68 @@
+---
+
+# 1. Role Defaults (defaults/main.yml)
+- name: Print role default variable
+  debug:
+    msg: "1-Role default variable: {{ role_default_var }}"
+
+
+# 2. Inventory File Variables (Group and Host)
+- name: Print inventory variable
+  debug:
+    msg: "2-Inventory variable: {{ inventory_var }}"
+
+
+# 3. Inventory Group Vars (group_vars directory)
+- name: Print group variable
+  debug:
+    msg: "3-Group variable: {{ group_var }}"
+
+
+# 4. Inventory Host Vars (host_vars directory)
+- name: Print host variable
+  debug:
+    msg: "4-Host variable: {{ host_var }}"
+
+
+# 5. Host Facts (Gathered with setup module)
+- name: Gather facts
+  setup:
+
+- name: Print ansible_facts
+  debug:
+    var: ansible_facts
+
+
+# 6. Playbook Variables (vars section)
+- name: Print playbook variable
+  debug:
+    msg: "6-Playbook variable: {{ playbook_var }}"
+
+# 7. Task Variables (vars section in task)
+- name: Print task variable
+  debug:
+    msg: "7-Task variable: {{ task_var }}"
+  vars:
+    task_var: "this is the task_var defined in the task"
+
+
+# 8. Extra Variables (command line with -e option)
+- name: Print extra variable
+  debug:
+    msg: "8-Extra variable: {{ extra_var }}"
+
+
+# 9. Role Vars (Defined in vars/main.yml in a role)
+- name: Print role variable
+  debug:
+    msg: "9-Role variable: {{ role_var }}"
+
+
+# 10. Registered Variables (output from a task)
+- name: Register command output
+  command: echo "Hello, World!"
+  register: command_output
+
+- name: Print registered variable
+  debug:
+    msg: "10-Command output: {{ command_output.stdout }}"

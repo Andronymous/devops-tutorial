@@ -1,0 +1,5 @@
+# package list for db servers
+packages:
+    - proxychains
+
+group_var: "this is group_var for dbservers group"

@@ -1,0 +1,5 @@
+# package list for web servers
+packages:
+    - net-tools
+
+group_var: "this is group_var for webservers group"
