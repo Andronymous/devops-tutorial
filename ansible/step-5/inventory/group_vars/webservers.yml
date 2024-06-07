@@ -1,0 +1,4 @@
+# package list for web servers
+packages:
+    - nginx
+    - vim

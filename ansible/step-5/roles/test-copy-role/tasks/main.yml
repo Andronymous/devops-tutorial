@@ -1,0 +1,45 @@
+---
+
+# 1. Basic File Transfer:
+- name: Copy a file to the remote host
+  copy:
+    src: /data/file.txt
+    dest: /data/file.txt
+
+# 2. Advanced File Transfer:
+- name: Copy a file and set permissions and ownership
+  copy:
+    src: /data/file.txt
+    dest: /data/file.txt
+    owner: myuser
+    group: mygroup
+    mode: '0644' # or use preserve to transfer the exact source (src) permissions
+    backup: yes # creates a backup of the file on the remote host if it already exists.
+    force: yes # forces the copy even if the destination file already exists.
+
+# 3. Copying a Directory:
+- name: Copy /data directory to remote /data directory
+  copy:
+    src: /data
+    dest: /data
+    recursive: yes
+
+# 4. Remote to Remote Copy:
+- name: Copy /etc/hosts from server1 to /tmp/hosts on server2
+  copy:
+    src: /path/on/remote/source/file.txt
+    dest: /path/on/remote/destination/file.txt
+    remote_src: yes
+
+# 5. Basic File Transfer for apt proxy:
+- name: Copy socks5 config for apt
+  copy:
+    src: 95proxies
+    dest: /etc/apt/apt.conf.d/95proxies
+    force: yes
+
+- name: Copy http proxy for apt
+  copy:
+    src: proxy.conf
+    dest: /etc/apt/apt.conf.d/proxy.conf
+    force: yes

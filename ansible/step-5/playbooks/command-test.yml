@@ -1,0 +1,8 @@
+---
+
+- name: Test the command module in different practices
+  hosts: all
+  become: true
+  gather_facts: no
+  roles:
+    - test-command-role

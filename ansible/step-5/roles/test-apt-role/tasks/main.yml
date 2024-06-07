@@ -1,0 +1,54 @@
+---
+
+# 1. Simple Package Installation
+- name: Install apache2 package
+  apt:
+    name: apache2
+    state: present  # Installs the package if not already present
+
+# 2. Upgrading Packages to the Latest Version
+- name: Upgrade packages
+  apt:
+    upgrade: yes
+    update_cache: yes
+    install_recommends: yes
+
+- name: Autoremove unnecessary packages
+  command: apt-get autoremove -y
+
+# 3. Removing a Package
+- name: Remove nginx package
+  apt:
+    name: nginx
+    state: absent  # Removes the package if present
+    purge: yes
+
+- name: Autoremove unnecessary packages
+  command: apt-get autoremove -y
+
+# 4. Package Installation from a Specific Repository:
+- name: Add Nginx’s official GPG key
+  apt_key:
+    url: https://nginx.org/keys/nginx_signing.key
+    state: present
+
+- name: Add Nginx APT repository
+  apt_repository:
+    repo: 'deb http://nginx.org/packages/ubuntu/ focal nginx'
+    state: present
+
+- name: Update APT cache
+  apt:
+    update_cache: yes
+
+- name: Install Nginx
+  apt:
+    name: nginx
+    state: present
+
+# 5. Multiple Packages Installation using loop:
+- name: Install packages from variables
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ packages }}"

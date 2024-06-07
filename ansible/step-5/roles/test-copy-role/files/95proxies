@@ -1,0 +1,2 @@
+Acquire::http::Proxy "socks5h://188.121.99.16:4444/";
+Acquire::https::Proxy "socks5h://188.121.99.16:4444/";

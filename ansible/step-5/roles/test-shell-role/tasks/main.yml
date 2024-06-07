@@ -1,0 +1,20 @@
+---
+
+# 1. Basic Shell Command Execution:
+- name: Create /data directory
+  shell: mkdir /data
+  ignore_errors: yes
+
+# 2. Multi-Line Commands with shell:
+- name: Update package lists and upgrade packages
+  shell: |
+    apt update
+    apt upgrade -y
+
+# 3. Capturing Shell Output:
+- name: List logged-in users
+  shell: whoami
+  register: whoami_output
+
+- debug:
+    msg: "Currently logged in user: {{ whoami_output.stdout }}"

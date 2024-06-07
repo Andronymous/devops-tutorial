@@ -1,0 +1,6 @@
+# package list for all groups
+packages:
+    - vim
+    - wget
+    - git
+    - net-tools

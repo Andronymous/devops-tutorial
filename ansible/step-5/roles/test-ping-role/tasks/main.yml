@@ -1,0 +1,5 @@
+---
+
+# 1. Verify the reachability of hosts:
+- name: Ensure all servers are reachable
+  ping:

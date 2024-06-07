@@ -1,0 +1,32 @@
+---
+
+# 1. Simple Command Execution:
+- name: Run uptime command
+  command: uptime
+  register: uptime_output  # Capture output in a variable
+
+- name: Run uptime command
+  debug:
+    msg: "{{ uptime_output.stdout }}"  # Display the output
+
+
+# 2. Simple Command Execution:
+- name: Display list of files in /var/log
+  command: ls /var/log
+  register: log_files_output
+
+- name: Show the list of files
+  debug:
+    msg : "{{ log_files_output.stdout }}"  # Display the output
+
+# 3. Handling Failed Commands:
+- name: Check if nginx is running
+  command: systemctl status nginx
+  register: result
+  ignore_errors: yes
+  failed_when: "'Active: active (running)' not in result.stdout"
+
+- name: Debug output
+  debug:
+    msg: "{{ result.stdout }}"
+

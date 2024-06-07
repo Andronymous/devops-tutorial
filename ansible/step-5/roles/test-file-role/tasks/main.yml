@@ -1,0 +1,33 @@
+---
+
+# 1. Creating a Simple File:
+- name: Create /etc/myconfig.txt
+  file:
+    path: /etc/myconfig.txt
+    state: touch  # Creates the file if it doesn't exist
+
+# 2. Removing a File:
+- name: Remove /tmp/myfile.txt (if it exists)
+  file:
+    path: /tmp/myfile.txt
+    state: absent  # Removes the file if it exists
+
+# 3. Changing File Permissions:
+- name: Set permissions on /tmp/myfile.txt to 755
+  file:
+    path: /tmp/myfile.txt
+    mode: 0755 # Octal representation of the permissions u=rwx,g=rx,o=rx
+    #mode: 'u=rwx,g=rx,o=rx' # Set permissions to 755 using character mod
+
+# 4. Changing File Ownership:
+- name: Set owner of /tmp/myfile.txt to root:www-data
+  file:
+    path: /tmp/myfile.txt
+    owner: root
+    group: www-data
+
+# 5. Creating a Directory:
+- name: Create /var/www/data directory
+  file:
+    path: /var/www/data
+    state: directory # Creates the directory if it doesn't exist

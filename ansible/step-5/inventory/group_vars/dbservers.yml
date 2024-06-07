@@ -1,0 +1,6 @@
+# package list for db servers
+packages:
+    - vim
+    - net-tools
+    - htop
+    - proxychains
