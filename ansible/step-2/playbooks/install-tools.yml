@@ -1,0 +1,12 @@
+---
+- name: Ensure Nginx is installed and running
+  hosts: webservers
+  #gather_facts: no
+  become: true
+
+  tasks:
+    - name: "Install nginx"
+      apt:
+        name: nginx
+        state: present
+        #update_cache: yes
