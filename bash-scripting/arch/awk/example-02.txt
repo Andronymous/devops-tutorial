@@ -1,0 +1,3 @@
+Apple,Red,Sweet
+Banana,Yellow,Sweet
+Grape,Purple,Sour
