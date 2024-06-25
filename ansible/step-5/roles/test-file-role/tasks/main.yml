@@ -1,28 +1,28 @@
 ---
 
 # 1. Creating a Simple File:
-- name: Create /etc/myconfig.txt
+- name: Create /data/sample-script.sh
   file:
-    path: /etc/myconfig.txt
+    path: /data/sample-script.sh
     state: touch  # Creates the file if it doesn't exist
 
 # 2. Removing a File:
-- name: Remove /tmp/myfile.txt (if it exists)
+- name: Remove /etc/myconfig.txt (if it exists)
   file:
-    path: /tmp/myfile.txt
+    path: /etc/myconfig.txt
     state: absent  # Removes the file if it exists
 
 # 3. Changing File Permissions:
-- name: Set permissions on /tmp/myfile.txt to 755
+- name: Set permissions on /data/sample-script.sh to 755
   file:
-    path: /tmp/myfile.txt
+    path: /data/sample-script.sh
     mode: 0755 # Octal representation of the permissions u=rwx,g=rx,o=rx
     #mode: 'u=rwx,g=rx,o=rx' # Set permissions to 755 using character mod
 
 # 4. Changing File Ownership:
-- name: Set owner of /tmp/myfile.txt to root:www-data
+- name: Set owner of /etc/myconfig.txt to root:www-data
   file:
-    path: /tmp/myfile.txt
+    path: /data/sample-script.sh
     owner: root
     group: www-data
 
@@ -31,3 +31,4 @@
   file:
     path: /var/www/data
     state: directory # Creates the directory if it doesn't exist
+    owner: root

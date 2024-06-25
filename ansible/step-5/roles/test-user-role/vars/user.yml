@@ -1,0 +1,4 @@
+---
+user_name: "someuser"
+user_pass: "{{ '123456789' | password_hash('sha512') }}"
+user_group: "somegroup"
