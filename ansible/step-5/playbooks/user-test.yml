@@ -1,0 +1,10 @@
+---
+- name: Test the shell module in different practices
+  hosts: all
+  become: true
+  gather_facts: no
+  vars_files:
+    - ../roles/test-user-role/vars/user.yml
+    #- ../roles/test-user-role/vars/my_user_with_bas64_pass.yml
+  roles:
+    - test-user-role

@@ -1,0 +1,38 @@
+---
+
+# 1. Create or Delete an User:
+- name: Create user with password
+  user:
+    name: "{{ user_name }}"  # Secure password
+    password: "{{ user_pass }}"  # Secure password
+    groups: "{{ user_group }}"  # Secure password
+    state: present # or absent
+    shell: /bin/bash
+
+# 2. Create or Delete an User using vault in a custom path:
+- name: Load user variables
+  set_fact:
+    user_vars: "{{ lookup('file', '/data/user.yml') | from_yaml }}"
+
+- name: Hash the password
+  set_fact:
+    hashed_password: "{{ user_vars.user_pass | password_hash('sha512') }}"
+
+- name: Create user with password from a certain variable file
+  user:
+    name: "{{ user_vars.user_name }}"  # Secure username
+    password: "{{ hashed_password }}"  # Secure hashed password
+    state: present  # or absent
+
+# 3. Disable user (from access to shell)
+- name: Disable a user account
+  user:
+    name: "{{ user_name }}"
+    state: present
+    shell: /sbin/nologin
+
+# 4. Remove user
+- name: Disable a user account
+  user:
+    name: "{{ user_name }}"
+    state: absent
