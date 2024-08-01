@@ -20,8 +20,8 @@ EOF
 ```shell
 cat <<EOF >/etc/systemd/system/docker.service.d/http-proxy.conf
 [Service]
-Environment="HTTP_PROXY=http://188.120.99.16:5556"
-Environment="HTTPS_PROXY=http://188.120.99.16:5556"
+Environment="HTTP_PROXY=http://188.121.99.16:5366"
+Environment="HTTPS_PROXY=http://188.121.99.16:5366"
 Environment="NO_PROXY=localhost,127.0.0.1"
 EOF
 ```

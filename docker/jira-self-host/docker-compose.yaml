@@ -1,0 +1,38 @@
+version: '3.3'
+
+networks:
+  jira_net:
+    external: true
+
+services:
+  jira:
+    container_name: jira
+    restart: always
+    ports:
+      - '18009:8080'
+    environment:
+      - TZ=Asia/Tehran
+    volumes:
+      - /data/atlassian/jira/data:/var/jira
+      - /data/atlassian/jira/conf:/opt/jira/conf
+    image: wangzan18/jira:latest
+    depends_on:
+      - atlassiandb
+    networks:
+      - jira_net
+
+  atlassiandb:
+    image: postgres:14.6
+    container_name: atlassiandb
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=79z9ZZx8zdGsZ6v9RR86BfaxF
+      - POSTGRES_ENCODING=UTF8
+      - POSTGRES_COLLATE=en_US.utf8
+    volumes:
+      - /data/atlassian/atlassiandb/db:/var/lib/postgresql/data
+    networks:
+      - jira_net
