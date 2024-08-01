@@ -1,0 +1,13 @@
+version: '3.2'
+
+services:
+
+  nginx1:
+    image: nginx
+    container_name: mynginx1
+    restart: unless-stopped
+
+  nginx2:
+    image: bitnami/nginx
+    container_name: mynginx2
+    restart: unless-stopped

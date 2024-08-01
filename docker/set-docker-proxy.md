@@ -10,8 +10,8 @@ mkdir -p /etc/systemd/system/docker.service.d
 ```shell
 cat <<EOF >/etc/systemd/system/docker.service.d/http-proxy.conf
 [Service]
-Environment="HTTP_PROXY=http://username:password@host.com:port
-Environment="HTTPS_PROXY=http://username:password@host.com:port
+Environment="HTTP_PROXY=http://username:password@host.com:port"
+Environment="HTTPS_PROXY=http://username:password@host.com:port"
 Environment="NO_PROXY=localhost,127.0.0.1,example-no-proxy.com"
 EOF
 ```
@@ -20,9 +20,9 @@ EOF
 ```shell
 cat <<EOF >/etc/systemd/system/docker.service.d/http-proxy.conf
 [Service]
-Environment="HTTP_PROXY=http://myuser:abcd123@188.121.99.16:5555"
-Environment="HTTPS_PROXY=http://myuser:abcd123@188.121.99.16:5555"
-Environment="NO_PROXY=localhost,127.0.0.1,example-no-proxy.com"
+Environment="HTTP_PROXY=http://188.120.99.16:5556"
+Environment="HTTPS_PROXY=http://188.120.99.16:5556"
+Environment="NO_PROXY=localhost,127.0.0.1"
 EOF
 ```
 
