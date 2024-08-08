@@ -3,10 +3,10 @@ FROM ubuntu:20.04
 
 ENV REPO_OS_OVERRIDE "linux"
 
-RUN apt-get  update && \
-    apt-get  upgrade -y --no-install-recommends && \
-    apt-get  install -y --no-install-recommends apt-utils && \
-    apt-get  install -y --no-install-recommends software-properties-common && \
+RUN apt-get update && \
+    apt-get upgrade -y --no-install-recommends && \
+    apt-get install -y --no-install-recommends apt-utils && \
+    apt-get install -y --no-install-recommends software-properties-common && \
     add-apt-repository --yes --update ppa:ansible/ansible
 
 RUN apt-get update && \

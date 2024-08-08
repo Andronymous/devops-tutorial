@@ -1,7 +1,7 @@
 version: '3.2'
 services:
   ansible-controller:
-    image: hub.zamin.link/devops/ansible-controller:latest
+    image: hub.andronymous.ir/devops/ansible-controller:latest
     container_name: ansible-controller
     restart: unless-stopped
     volumes:
