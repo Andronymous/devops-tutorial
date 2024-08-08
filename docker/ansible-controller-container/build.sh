@@ -5,7 +5,11 @@ docker build --no-cache=true -t hub.andronymous.ir/devops/ansible-controller .
 
 
 
-#common flags :
+common flags :
+#
+#-t, --tag:
+#Description: Tags the image with the specified name and optionally a tag (in this case, the tag is omitted so it defaults to latest).
+#Example: docker build -t hub.andronymous.ir/devops/ansible-controller .
 #
 #-f, --file:
 #Description: Specify a Dockerfile to use (default is Dockerfile in the build context).
