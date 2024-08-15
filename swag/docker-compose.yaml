@@ -1,0 +1,35 @@
+version: '3.5'
+
+networks:
+  web_net:
+    external: true  
+
+services:
+  swag-proxy:
+    image: linuxserver/swag:latest
+    container_name: swag-proxy
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=Europe/London
+      - URL=git.andronymous.ir
+      - VALIDATION=http
+      - EXTRA_DOMAINS=
+      - EMAIL=dev@andronymous.ir
+      - DHLEVEL=2048
+      - STAGING=false
+    volumes:
+      - swag_conf:/config
+      - swag_files:/www
+    networks:
+      - web_net
+
+volumes:
+  swag_conf:
+    external: true
+  swag_files:
+    external: true
