@@ -1,0 +1,37 @@
+version: '3.4'
+
+networks:
+  web_net:
+    external: true
+  git_net:
+    external: false
+
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:16.11.8-ce.0
+    restart: always
+    container_name: gitlab
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'https://git.andronymous.ir'
+        nginx['listen_port'] = 80
+        nginx['listen_https'] = false
+        nginx['http2_enabled'] = false
+        nginx['redirect_http_to_https'] = false
+        nginx['custom_gitlab_server_config'] = "error_page 497 https://$$host:$$server_port$$request_uri;"
+        gitlab_rails['gitlab_default_can_create_group'] = false
+        gitlab_rails['gitlab_shell_ssh_port'] = 20
+        gitlab_rails['registry_host'] = "git.andronymous.ir"
+        gitlab_rails['registry_port'] = "80"
+        registry_nginx['listen_port'] = 80
+        registry['enable'] = true
+        registry['registry_http_addr'] = "localhost:5000"
+        registry_external_url = "https://git.andronymous.ir"
+    volumes:
+      - /data/gitlab-try/data/gitlab_backups:/var/opt/gitlab/backups
+      - /data/gitlab-try/data/gitlab_data:/var/opt/gitlab
+      - /data/gitlab-try/data/gitlab_logs:/var/log/gitlab
+      - /data/gitlab-try/data/gitlab_config:/etc/gitlab
+    networks:
+      git_net:
+      web_net:
