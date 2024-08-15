@@ -1,0 +1,25 @@
+version: '3.2'
+
+services:
+
+  nginx1:
+    image: nginx
+    container_name: proxy
+    restart: unless-stopped
+    volumes:
+      - nginx_conf:/etc/nginx
+      - nginx_files:/var/www/nginx
+    ports:
+      - '80:80'
+    networks:
+      web_net:
+
+volumes:
+  nginx_conf:
+    external: true
+  nginx_files:
+    external: true
+    
+networks:
+  web_net:
+    external: true
