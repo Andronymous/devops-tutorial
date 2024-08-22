@@ -19,14 +19,16 @@ services:
         nginx['http2_enabled'] = false
         nginx['redirect_http_to_https'] = false
         nginx['custom_gitlab_server_config'] = "error_page 497 https://$$host:$$server_port$$request_uri;"
+        
+        registry_external_url = "https://repo.andronymous.ir"
+        gitlab_rails['registry_enabled'] = True
+        gitlab_rails['registry_host'] = "repo.andronymous.ir"
+        gitlab_rails['registry_port'] = "5000"
         gitlab_rails['gitlab_default_can_create_group'] = false
         gitlab_rails['gitlab_shell_ssh_port'] = 20
-        gitlab_rails['registry_host'] = "git.andronymous.ir"
-        gitlab_rails['registry_port'] = "80"
         registry_nginx['listen_port'] = 80
         registry['enable'] = true
         registry['registry_http_addr'] = "localhost:5000"
-        registry_external_url = "https://git.andronymous.ir"
     volumes:
       - /data/gitlab-try/data/gitlab_backups:/var/opt/gitlab/backups
       - /data/gitlab-try/data/gitlab_data:/var/opt/gitlab
