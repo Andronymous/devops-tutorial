@@ -9,6 +9,8 @@ services:
     volumes:
       - nginx_conf:/etc/nginx
       - nginx_files:/var/www/nginx
+      - nginx_logs:/var/log/nginx
+      - /etc/letsencrypt:/etc/nginx/ssl
     ports:
       - '80:80'
     networks:
@@ -19,7 +21,12 @@ volumes:
     external: true
   nginx_files:
     external: true
-    
+  nginx_logs:
+    external: true
+
 networks:
   web_net:
     external: true
+
+
+
