@@ -13,27 +13,54 @@ services:
     container_name: gitlab
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        external_url 'https://git.andronymous.ir'
+
+        ## Gitlab configs
+        external_url 'http://git.andronymous.ir'
         nginx['listen_port'] = 80
-        nginx['listen_https'] = false
-        nginx['http2_enabled'] = false
         nginx['redirect_http_to_https'] = false
-        nginx['custom_gitlab_server_config'] = "error_page 497 https://$$host:$$server_port$$request_uri;"
-        
-        registry_external_url = "https://repo.andronymous.ir"
-        gitlab_rails['registry_enabled'] = True
-        gitlab_rails['registry_host'] = "repo.andronymous.ir"
-        gitlab_rails['registry_port'] = "5000"
-        gitlab_rails['gitlab_default_can_create_group'] = false
-        gitlab_rails['gitlab_shell_ssh_port'] = 20
-        registry_nginx['listen_port'] = 80
+        nginx['listen_https'] = false
+        nginx['custom_gitlab_server_config'] = "error_page 497 http://$$host:$$server_port$$request_uri;"
+        gitlab_rails['gitlab_shell_ssh_port'] = 22
+
+        ## Package Registry
         registry['enable'] = true
-        registry['registry_http_addr'] = "localhost:5000"
+        registry_external_url 'http://reg.andronymous.ir'
+        registry_nginx['listen_port'] = 80
+        registry_nginx['redirect_http_to_https'] = false
+        registry_nginx['listen_https'] = false
+
+        ## SSL configs
+        nginx['ssl_certificate'] = "/ssl/etc/letsencrypt/live/git.andronymous.ir/fullchain.pem"
+        nginx['ssl_certificate_key'] = "/ssl/etc/letsencrypt/live/git.andronymous.ir/privkey.pem"
+
+        registry_nginx['ssl_certificate'] = "/ssl/etc/letsencrypt/live/git.andronymous.ir/fullchain.pem"
+        registry_nginx['ssl_certificate_key'] = "/ssl/etc/letsencrypt/live/git.andronymous.ir/privkey.pem"
+
     volumes:
       - /data/gitlab-try/data/gitlab_backups:/var/opt/gitlab/backups
       - /data/gitlab-try/data/gitlab_data:/var/opt/gitlab
       - /data/gitlab-try/data/gitlab_logs:/var/log/gitlab
       - /data/gitlab-try/data/gitlab_config:/etc/gitlab
+      - swag_conf:/ssl
     networks:
       git_net:
       web_net:
+
+  gitlab-runner-new:
+    image: gitlab/gitlab-runner:v16.7.0
+    restart: always
+    container_name: gitlab-runner
+    volumes:
+      - /data/gitlab-try/gitlab_runner/config:/etc/gitlab-runner
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - HTTP_PROXY=
+      - HTTPS_PROXY=
+      - http_proxy=
+      - https_proxy=
+    networks:
+      git_net:
+
+volumes:
+  swag_conf:
+    external: true
