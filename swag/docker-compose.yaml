@@ -8,7 +8,7 @@ services:
   swag-proxy:
     image: linuxserver/swag:latest
     container_name: swag-proxy
-    restart: unless-stopped
+    restart: always
     ports:
       - 80:80
       - 443:443
@@ -18,7 +18,7 @@ services:
       - TZ=Europe/London
       - URL=git.andronymous.ir
       - VALIDATION=http
-      - EXTRA_DOMAINS=
+      - EXTRA_DOMAINS=reg.andronymous.ir
       - EMAIL=dev@andronymous.ir
       - DHLEVEL=2048
       - STAGING=false

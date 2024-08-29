@@ -8,7 +8,7 @@ networks:
 
 services:
   gitlab:
-    image: gitlab/gitlab-ce:16.11.8-ce.0
+    image: gitlab/gitlab-ce:17.1.6-ce.0
     restart: always
     container_name: gitlab
     environment:
@@ -24,8 +24,9 @@ services:
 
         ## Package Registry
         registry['enable'] = true
-        registry_external_url 'http://reg.andronymous.ir'
-        registry_nginx['listen_port'] = 80
+        registry_external_url 'https://reg.andronymous.ir'
+        
+        registry_nginx['listen_port'] = 5050
         registry_nginx['redirect_http_to_https'] = false
         registry_nginx['listen_https'] = false
 
@@ -35,6 +36,11 @@ services:
 
         registry_nginx['ssl_certificate'] = "/ssl/etc/letsencrypt/live/git.andronymous.ir/fullchain.pem"
         registry_nginx['ssl_certificate_key'] = "/ssl/etc/letsencrypt/live/git.andronymous.ir/privkey.pem"
+    ports:
+      - '22:22'
+      #- "443:433"
+      #- "80:80"
+      #- '5050:5050'
 
     volumes:
       - /data/gitlab-try/data/gitlab_backups:/var/opt/gitlab/backups
@@ -47,7 +53,7 @@ services:
       web_net:
 
   gitlab-runner-new:
-    image: gitlab/gitlab-runner:v16.7.0
+    image: gitlab/gitlab-runner:v17.3.1
     restart: always
     container_name: gitlab-runner
     volumes:
