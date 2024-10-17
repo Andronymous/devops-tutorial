@@ -15,8 +15,8 @@ services:
       GITLAB_OMNIBUS_CONFIG: |
 
         ## Gitlab configs
-        external_url 'http://git.andronymous.ir'
-        nginx['listen_port'] = 80
+        external_url 'https://git.andronymous.ir'
+        nginx['listen_port'] = 443
         nginx['redirect_http_to_https'] = false
         nginx['listen_https'] = false
         nginx['custom_gitlab_server_config'] = "error_page 497 http://$$host:$$server_port$$request_uri;"
@@ -41,7 +41,6 @@ services:
       #- "443:433"
       #- "80:80"
       #- '5050:5050'
-
     volumes:
       - /data/gitlab-try/data/gitlab_backups:/var/opt/gitlab/backups
       - /data/gitlab-try/data/gitlab_data:/var/opt/gitlab
@@ -52,7 +51,8 @@ services:
       git_net:
       web_net:
 
-  gitlab-runner-new:
+
+  gitlab-runner:
     image: gitlab/gitlab-runner:v17.3.1
     restart: always
     container_name: gitlab-runner
